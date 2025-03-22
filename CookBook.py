@@ -4,29 +4,36 @@ import os
 
 recipes = []
 
+
 def load_recipes():
     global recipes
     try:
-        with open('recipes.json', 'r') as f:
+        with open("recipes.json", "r") as f:
             recipes = json.load(f)
     except FileNotFoundError:
         recipes = []
 
-def add_recipe():
-    print("Add Recipe:")
-    recipe_name = input("Enter the recipe name: ")
-    recipe_ingredients = input("Enter the ingredients: ")
-    recipe_instructions = input("Enter the instructions: ")
-    recipe_servings = input("Enter how many servings: ")
 
-    recipe = (recipe_name, recipe_ingredients, recipe_instructions, recipe_servings)
-    recipes.append(recipe)
-    return recipe
+
+def add_recipe():
+    while True:
+        print("Add Recipe:")
+        name = input("Enter the recipe name: ")
+        ingredients = input("Enter the ingredients: ")
+        instructions = input("Enter the instructions: ")
+        servings = input("Enter how many servings: ")
+
+        if not all([name, ingredients, instructions, servings]):
+            print("\nOne or more fields are empty. Recipe was not added, please try again.\n")
+            continue
+        else:
+            recipe = (name, ingredients, instructions, servings)
+            recipes.append(recipe)
+            print("Recipe added successfully!\n")
+            return recipe
+
 
 def view_recipe(recipe):
-    if len(recipe) != 4:
-        print("Invalid recipe format. Recipe must contain 4 items.")
-        return None
 
     name, ingredients, instructions, servings = recipe
 
@@ -37,6 +44,7 @@ def view_recipe(recipe):
     print(f"Servings: {servings}")
     print("----------------------\n")
 
+
 def view_all_recipes():
     if not recipes:
         print("No recipes available.")
@@ -46,17 +54,20 @@ def view_all_recipes():
         print(f"\n----- Recipe {i} -----")
         view_recipe(recipe)
 
+
 def search_recipes():
     print("Search Recipes:")
 
+
 def save_and_exit():
     print("saving...")
-    with open('recipes.json', 'w') as f:
+    with open("recipes.json", "w") as f:
         json.dump(recipes, f)
     time.sleep(2)
     print("exiting...")
     time.sleep(2)
     os._exit(0)
+
 
 def menu():
     while True:
@@ -79,6 +90,7 @@ def menu():
                 save_and_exit()
         except ValueError as e:
             print(e)
+
 
 if __name__ == "__main__":
     load_recipes()
