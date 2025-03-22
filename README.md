@@ -21,5 +21,5 @@
 
 ## Notes
 
-- The search functionality will be added once I learn how to implement it.
-- Removing recipes from the list is a planned feature.
+- The search functionality will be added once I learn how to implement it :).
+- Removing recipes from the list is a planned feature when i know how to :D.
