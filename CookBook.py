@@ -63,7 +63,7 @@ def menu():
         print("CookBook Menu:")
         print("1. Add Recipe")
         print("2. View All Recipes")
-        print("3. Search Recipes")
+        print("3. Search Recipes not implemented")
         print("4. Save and Exit")
 
         choice = input("Enter your choice: ")
