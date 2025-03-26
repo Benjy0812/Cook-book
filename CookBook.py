@@ -2,11 +2,13 @@ import json
 import time
 import os
 
+
 def clear_console():
     if os.name == "nt":
         os.system("cls")
     else:
         os.system("clear")
+
 
 recipes = []
 
@@ -20,7 +22,6 @@ def load_recipes():
         recipes = []
 
 
-
 def add_recipe():
     while True:
         print("Add Recipe:")
@@ -30,7 +31,9 @@ def add_recipe():
         servings = input("Enter how many servings: ")
 
         if not all([name, ingredients, instructions, servings]):
-            print("\nOne or more fields are empty. Recipe was not added, please try again.\n")
+            print(
+                "\nOne or more fields are empty. Recipe was not added, please try again.\n"
+            )
             continue
         else:
             clear_console()
@@ -61,7 +64,7 @@ def view_all_recipes():
     for i, recipe in enumerate(recipes, start=1):
         print(f"\n----- Recipe {i} -----")
         view_recipe(recipe)
-    
+
     input("Press enter to continue.")
     clear_console()
 
