@@ -1,5 +1,6 @@
 import json
 import time
+import sys
 import os
 
 
@@ -93,43 +94,50 @@ def save_and_exit():
     time.sleep(2)
     print("exiting...")
     time.sleep(2)
-    os._exit(0)
+    sys.exit
 
 
 def exit():
-    clear_console()
     print("Exiting...")
     time.sleep(2)
-    os._exit(0)
+    sys.exit
 
 
 def menu():
     while True:
-        print("CookBook Menu:")
-        print("1. Add Recipe.")
-        print("2. View All Recipes.")
-        print("3. Search Recipes.")
-        print("4. Save and Exit.")
-        print("5. Exit.\n")
-
-        choice = int(input("Enter your choice: "))
-
         try:
-            if choice == 1:
+            print("CookBook Menu:")
+            print("1. Add Recipe.")
+            print("2. View All Recipes.")
+            print("3. Search Recipes.")
+            print("4. Save and Exit.")
+            print("5. Exit.\n")
+
+            choice = int(input("Enter your choice: "))
+
+            if choice not in range(1, 6):
+                print("Invalid choice. Please try again.")
+                print("choice must be between 1 and 5\n")
+                continue
+            elif choice == 1:
                 clear_console()
                 add_recipe()
             elif choice == 2:
                 clear_console()
                 view_all_recipes()
             elif choice == 3:
+                clear_console()
                 search_recipes()
             elif choice == 4:
                 clear_console()
                 save_and_exit()
             elif choice == 5:
-                exit()
-        except ValueError as e:
-            print(e)
+                clear_console()
+                print("Exiting CookBook. Goodbye!")
+                break
+        except ValueError:
+            clear_console()
+            print("Invalid input. Please enter a number between 1 and 5.\n")
 
 
 if __name__ == "__main__":
