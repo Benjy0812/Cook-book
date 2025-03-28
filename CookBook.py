@@ -70,8 +70,19 @@ def view_all_recipes():
 
 
 def search_recipes():
-    print("Search Recipes:")
-    print("Not added yet wont work.")
+    clear_console()
+    search_term = input("Enter the recipe name to search: ").lower()
+    found_recipes = [recipe for recipe in recipes if search_term in recipe[0].lower()]
+
+    if not found_recipes:
+        print("\nNo recipes found with that name.\n")
+    else:
+        for i, recipe in enumerate(found_recipes, start=1):
+            print(f"\n----- Recipe {i} -----")
+            view_recipe(recipe)
+
+    input("Press enter to continue.")
+    clear_console()
 
 
 def save_and_exit():
@@ -85,28 +96,38 @@ def save_and_exit():
     os._exit(0)
 
 
+def exit():
+    clear_console()
+    print("Exiting...")
+    time.sleep(2)
+    os._exit(0)
+
+
 def menu():
     while True:
         print("CookBook Menu:")
         print("1. Add Recipe.")
         print("2. View All Recipes.")
-        print("3. Search Recipes not implemented yet.")
-        print("4. Save and Exit.\n")
+        print("3. Search Recipes.")
+        print("4. Save and Exit.")
+        print("5. Exit.\n")
 
-        choice = input("Enter your choice: ")
+        choice = int(input("Enter your choice: "))
 
         try:
-            if choice == "1":
+            if choice == 1:
                 clear_console()
                 add_recipe()
-            elif choice == "2":
+            elif choice == 2:
                 clear_console()
                 view_all_recipes()
-            elif choice == "3":
+            elif choice == 3:
                 search_recipes()
-            elif choice == "4":
+            elif choice == 4:
                 clear_console()
                 save_and_exit()
+            elif choice == 5:
+                exit()
         except ValueError as e:
             print(e)
 
