@@ -87,7 +87,6 @@ def search_recipes():
 
 
 def save_and_exit():
-    clear_console()
     print("saving...")
     with open("recipes.json", "w") as f:
         json.dump(recipes, f)
