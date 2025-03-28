@@ -20,6 +20,13 @@ def load_recipes():
         with open("recipes.json", "r") as f:
             recipes = json.load(f)
     except FileNotFoundError:
+        print("No recipes file found. Starting with an empty recipe list.")
+        recipes = []
+    except json.JSONDecodeError:
+        print(
+            "Error: recipes.json is corrupted. "
+            "you will be Starting with an empty recipe list."
+        )
         recipes = []
 
 
@@ -33,7 +40,10 @@ def add_recipe():
 
         if not all([name, ingredients, instructions, servings]):
             print(
-                "\nOne or more fields are empty. Recipe was not added, please try again.\n"
+                (
+                    "\nOne or more fields are empty. "
+                    "Recipe was not added, please try again.\n"
+                )
             )
             continue
         else:
@@ -73,7 +83,8 @@ def view_all_recipes():
 def search_recipes():
     clear_console()
     search_term = input("Enter the recipe name to search: ").lower()
-    found_recipes = [recipe for recipe in recipes if search_term in recipe[0].lower()]
+    found_recipes = [
+        recipe for recipe in recipes if search_term in recipe[0].lower()]
 
     if not found_recipes:
         print("\nNo recipes found with that name.\n")
